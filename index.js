@@ -98,17 +98,19 @@ const operatingHours = [
 const myDays = operatingHours.map((item) => {
   const container = {};
 
-
   const daysOfWeek = [
-    'Monday',
-    'Tuesday',
-    'Wedensday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
+    { day: 'Monday' },
+    { day: 'Tuesday' },
+    { day: 'Wednesday' },
+    { day: 'Thursday' },
+    { day: 'Friday' },
+    { day: 'Saturday' },
+    { day: 'Sunday' },
   ];
 
+  //All days of the week
+
+  //12 hour clock
   const milToStandard = (time) => {
     time = time.split(':'); //array
 
@@ -133,39 +135,13 @@ const myDays = operatingHours.map((item) => {
     return timeValue;
   };
 
-  const newOpenTime = milToStandard(item.openHour);
-  const newCloseTime = milToStandard(item.closeHour);
-  console.log('milt conver ' + newOpenTime + ' - ' + newCloseTime);
-
   container.day = item.day;
-  container.closed = item.closeHour;
-  container.open = item.openHour;
+  container.closed = milToStandard(item.closeHour);
+  container.open = milToStandard(item.openHour);
 
   return container;
 });
 
-const addMissingDays = (inputArray) => {
-  const days = [
-    'Monday',
-    'Tuesday',
-    'Wedensday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
-  const result = days; //mutable array to store results
-
-  inputArray.forEach((el) => {
-    const index = day;
-    if (index !== -1) {
-      result[index] = el;
-    }
-  });
-  return result;
-};
 let result = [];
-addMissingDays(myDays).forEach((el) => {});
 
 console.log(myDays);
-console.log(newDaysHours);
