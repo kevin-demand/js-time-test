@@ -98,16 +98,6 @@ const operatingHours = [
 const myDays = operatingHours.map((item) => {
   const container = {};
 
-  const daysOfWeek = [
-    { day: 'Monday' },
-    { day: 'Tuesday' },
-    { day: 'Wednesday' },
-    { day: 'Thursday' },
-    { day: 'Friday' },
-    { day: 'Saturday' },
-    { day: 'Sunday' },
-  ];
-
   //All days of the week
 
   //12 hour clock
@@ -141,6 +131,24 @@ const myDays = operatingHours.map((item) => {
 
   return container;
 });
+
+const daysOfWeek = [
+  { day: 'Monday' },
+  { day: 'Tuesday' },
+  { day: 'Wednesday' },
+  { day: 'Thursday' },
+  { day: 'Friday' },
+  { day: 'Saturday' },
+  { day: 'Sunday' },
+];
+
+function add(kday) {
+  if (myDays.filter((item) => item.day == kday)) {
+    myDays.push({ day: kday, openHour: 'Closed', closeHour: ' ' });
+  } else return;
+}
+
+add('Friday');
 
 let result = [];
 
