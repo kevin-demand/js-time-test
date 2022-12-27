@@ -98,8 +98,6 @@ const operatingHours = [
 const myDays = operatingHours.map((item) => {
   const container = {};
 
-  //All days of the week
-
   //12 hour clock
   const milToStandard = (time) => {
     time = time.split(':'); //array
@@ -125,6 +123,11 @@ const myDays = operatingHours.map((item) => {
     return timeValue;
   };
 
+  // console.log(item);
+  if (item.day !== 'Monday') {
+    container.isOpen = true;
+  } else container.isOpen = false;
+
   container.day = item.day;
   container.closed = milToStandard(item.closeHour);
   container.open = milToStandard(item.openHour);
@@ -132,7 +135,8 @@ const myDays = operatingHours.map((item) => {
   return container;
 });
 
-const daysOfWeek = [
+// Add all 7 days
+let daysOfWeek = [
   { day: 'Monday' },
   { day: 'Tuesday' },
   { day: 'Wednesday' },
@@ -141,15 +145,35 @@ const daysOfWeek = [
   { day: 'Saturday' },
   { day: 'Sunday' },
 ];
+const result = daysOfWeek.map((d) => ({
+  ...d,
+  ...myDays.find((a) => a.day === d.day),
+}));
 
-function add(kday) {
-  if (myDays.filter((item) => item.day == kday)) {
-    myDays.push({ day: kday, openHour: 'Closed', closeHour: ' ' });
-  } else return;
-}
+//Map final array with string for each day
+let finalResult = [];
+result.forEach((el) => {
+  if (el.open != null) {
+    finalResult.push(`${el.day}: ${el.open} - ${el.closed}`);
+  } else {
+    finalResult.push(`${el.day}: Closed`);
+  }
+});
 
-add('Friday');
 
-let result = [];
+console.log(finalResult);
 
-console.log(myDays);
+// for (const days in daysOfWeek) {
+//   console.log(daysOfWeek[days]);
+// }
+
+// for (const days of daysOfWeek) {
+//   console.log(days);
+// }
+
+// daysOfWeek.forEach((days) => {
+//   console.log(days);
+// });
+
+//console.log(myDays);
+//console.log(dayOfTheWeek);
